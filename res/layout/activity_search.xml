@@ -9,24 +9,34 @@
     tools:context=".SearchActivity" >
 
     <EditText
-        android:id="@+id/et_query"
+        android:id="@+id/etQuery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:ems="10"
-        android:hint="@string/hint_query"
+        android:hint="@string/hintQuery"
         android:inputType="text" >
 
         <requestFocus />
     </EditText>
 
     <Button
-        android:id="@+id/btn_search"
+        android:id="@+id/btnSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="@string/txt_search_button" />
+        android:onClick="onImageSearch"
+        android:text="@string/txtSearchButton" />
+
+    <GridView
+        android:id="@+id/gvResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btnSearch"
+        android:numColumns="3" >
+    </GridView>
 
 </RelativeLayout>

@@ -14,14 +14,17 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.ExpandableListView.OnChildClickListener;
+
 import android.widget.GridView;
 import android.widget.Toast;
 import net.tensory.googleimagesearch.ImageResult;
@@ -32,6 +35,7 @@ public class SearchActivity extends Activity {
 	GridView gvResults;
 	ArrayList<ImageResult> imageResults = new ArrayList<ImageResult>();
 	ImageResultArrayAdapter imageAdapter;
+	public static String PACKAGE_NAME;
 	
 	// Using filter expandable UI from http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
 	ExpandableListAdapter listAdapter;
@@ -45,6 +49,8 @@ public class SearchActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		PACKAGE_NAME = getApplicationContext().getPackageName();
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search);
 		setupViews();
@@ -54,6 +60,29 @@ public class SearchActivity extends Activity {
 		setupFilters();
 		listAdapter = new ExpandableListAdapter(this, listFilterDataHeader, listFilterDataChild);
 		expListView.setAdapter(listAdapter);
+		expListView.setOnChildClickListener(new OnChildClickListener() {
+			@Override
+			public boolean onChildClick(ExpandableListView parent, View v,
+					int groupPosition, int childPosition, long id) {
+				String filterName = (String) listAdapter.getChild(groupPosition, childPosition);
+				Toast.makeText(getApplicationContext(), filterName, Toast.LENGTH_LONG).show();
+				
+				// Direct the app to an intent based on the clicked filter.
+				Class intentClass = null;
+				try {
+					intentClass = Class.forName(SearchActivity.PACKAGE_NAME + "." + filterName + "FilterActivity");
+				} catch (ClassNotFoundException c) {
+					c.printStackTrace();
+				}
+				
+				if (intentClass != null) {
+					startActivity(new Intent(getApplicationContext(), intentClass));
+				}
+				
+				return false;
+			}
+			
+		});
 	}
 
 	@Override
@@ -74,8 +103,9 @@ public class SearchActivity extends Activity {
 		listFilterDataHeader = new ArrayList<String>();
 		listFilterDataChild = new HashMap<String, List<String>>();
 		listFilterDataHeader.add(getResources().getString(R.string.txtFilterGroupLabel));
-		List filters = new ArrayList<String>();
-		filters.add("Color");
+		
+		List<String> filters = new ArrayList<String>();
+		filters.add(getResources().getString(R.string.txtFilterNameColor));
 		listFilterDataChild.put(listFilterDataHeader.get(0), filters);
 	}
 	

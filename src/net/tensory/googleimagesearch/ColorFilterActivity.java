@@ -39,8 +39,8 @@ public class ColorFilterActivity extends Activity {
 		// Yuck. Would like to abstract this...
 		// Or use local storage?
 		Integer[] colors = {
-				R.string.txtColorName_Orange,
 				R.string.txtColorName_Red,
+				R.string.txtColorName_Orange,
 				R.string.txtColorName_Yellow,
 				R.string.txtColorName_Green,
 				R.string.txtColorName_Blue,
@@ -51,7 +51,7 @@ public class ColorFilterActivity extends Activity {
 				R.string.txtColorName_Gray,
 				R.string.txtColorName_Brown
 		};
-		ArrayList<Integer> ids = new ArrayList();
+		ArrayList<Integer> ids = new ArrayList<Integer>();
 		for (Integer id : colors) {
 			ids.add(id);
 		}

@@ -35,17 +35,9 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignRight="@+id/btnSearch"
-        android:layout_below="@+id/elvFilters"
+        android:layout_below="@+id/btnSearch"
         android:layout_centerVertical="true"
         android:numColumns="3" >
     </GridView>
-
-    <ExpandableListView
-        android:id="@+id/elvFilters"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/btnSearch"
-        android:layout_below="@+id/btnSearch" >
-    </ExpandableListView>
 
 </RelativeLayout>

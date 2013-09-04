@@ -28,6 +28,10 @@
             android:name="net.tensory.googleimagesearch.ColorFilterActivity"
             android:label="@string/title_activity_color_filter" >
         </activity>
+        <activity
+            android:name="net.tensory.googleimagesearch.AdvancedSearchActivity"
+            android:label="@string/title_activity_advanced_search" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,8 +1,6 @@
 package net.tensory.googleimagesearch;
 
 import java.util.ArrayList;
-import java.util.Collection;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

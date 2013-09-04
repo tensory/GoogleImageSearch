@@ -1,6 +1,8 @@
 package net.tensory.googleimagesearch;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,15 +19,25 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.GridView;
+import android.widget.Toast;
 import net.tensory.googleimagesearch.ImageResult;
 
 public class SearchActivity extends Activity {
-	private EditText etQuery;
-	private Button btnSearch;
-	private GridView gvResults;
-	private ArrayList<ImageResult> imageResults = new ArrayList<ImageResult>();
-	private ImageResultArrayAdapter imageAdapter;
+	EditText etQuery;
+	Button btnSearch;
+	GridView gvResults;
+	ArrayList<ImageResult> imageResults = new ArrayList<ImageResult>();
+	ImageResultArrayAdapter imageAdapter;
+	
+	// Using filter expandable UI from http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
+	ExpandableListAdapter listAdapter;
+    ExpandableListView expListView;
+    List<String> listFilterDataHeader;
+    HashMap<String, List<String>> listFilterDataChild;
 	
 	// In a large app, where would I store a string like this, that isn't a UI string
 	// so that it's easy to find and maintain later?
@@ -37,7 +49,11 @@ public class SearchActivity extends Activity {
 		setContentView(R.layout.activity_search);
 		setupViews();
 		imageAdapter = new ImageResultArrayAdapter(this, imageResults);
-		gvResults.setAdapter(imageAdapter); 
+		gvResults.setAdapter(imageAdapter);
+		
+		setupFilters();
+		listAdapter = new ExpandableListAdapter(this, listFilterDataHeader, listFilterDataChild);
+		expListView.setAdapter(listAdapter);
 	}
 
 	@Override
@@ -51,6 +67,16 @@ public class SearchActivity extends Activity {
 		etQuery = (EditText) findViewById(R.id.etQuery);
 		btnSearch = (Button) findViewById(R.id.btnSearch);
 		gvResults = (GridView) findViewById(R.id.gvResults);
+		expListView = (ExpandableListView) findViewById(R.id.elvFilters);
+	}
+	
+	public void setupFilters() {
+		listFilterDataHeader = new ArrayList<String>();
+		listFilterDataChild = new HashMap<String, List<String>>();
+		listFilterDataHeader.add(getResources().getString(R.string.txtFilterGroupLabel));
+		List filters = new ArrayList<String>();
+		filters.add("Color");
+		listFilterDataChild.put(listFilterDataHeader.get(0), filters);
 	}
 	
 	public void onImageSearch(View v) {

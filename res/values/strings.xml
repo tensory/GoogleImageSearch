@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="txtSearchButton">Search</string>
     <string name="hintQuery">Search for...</string>
+    <string name="txtFilterGroupLabel">Filters</string>
 
 </resources>

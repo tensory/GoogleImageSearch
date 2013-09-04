@@ -9,5 +9,15 @@
     <string name="txtFilterGroupLabel">Filters</string>
     <string name="txtFilterNameColor">Color</string>
     <string name="title_activity_color_filter">Filter by Color</string>
-
+    <string name="txtColorName_Blue">Blue</string>
+    <string name="txtColorName_Red">Red</string>
+    <string name="txtColorName_Green">Green</string>
+    <string name="txtColorName_Purple">Purple</string>
+    <string name="txtColorName_Gray">Grey</string>
+    <string name="txtColorName_Black">Black</string>
+    <string name="txtColorName_Brown">Brown</string>
+    <string name="txtColorName_Orange">Orange</string>
+    <string name="txtColorName_Pink">Pink</string>
+    <string name="txtColorName_White">White</string>
+	<string name="txtColorName_Yellow">Yellow</string>
 </resources>
